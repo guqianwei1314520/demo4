@@ -25,6 +25,7 @@ public class LoginController {
              session.setAttribute("token",String.valueOf(object.get("token")));
              session.setAttribute("username",username);
              session.setAttribute("password",password);
+             session.setAttribute("roleId",String.valueOf(object.get("roleId")));
          }
          return object;
     }
