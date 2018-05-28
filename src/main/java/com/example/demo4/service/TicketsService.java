@@ -11,4 +11,6 @@ public interface TicketsService {
 
     @Cacheable(value="ticket")
     public TicketsBean queryById(int id);
+
+    public JSONObject addTicket(TicketsBean ticketsBean);
 }

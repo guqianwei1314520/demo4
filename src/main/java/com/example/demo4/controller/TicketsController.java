@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/tickets")
@@ -19,6 +20,13 @@ public class TicketsController {
 
     @RequestMapping("/all")
     public JSONObject getTickets(HttpSession session){
+        JSONObject object_tmp=new JSONObject();
+        String roleId=String.valueOf(session.getAttribute("roleId"));
+        if(!"2".equals(roleId)){
+            object_tmp.put("code",2);
+            object_tmp.put("msg","No authority");
+            return object_tmp;
+        }
         JSONObject  object=ticketsService.queryAll(String.valueOf(session.getAttribute("username")));
         object.put("token",session.getAttribute("token"));
         return object;
@@ -32,5 +40,17 @@ public class TicketsController {
         object.put("data",tickets);
 
         return object;
+    }
+
+    @RequestMapping("/add")
+    public JSONObject addTicket(TicketsBean ticketsBean,HttpSession session){
+        JSONObject object=new JSONObject();
+        String roleId=String.valueOf(session.getAttribute("roleId"));
+        if(!"1".equals(roleId)){
+            object.put("code",2);
+            object.put("msg","No authority");
+            return object;
+        }
+        return ticketsService.addTicket(ticketsBean);
     }
 }

@@ -28,6 +28,7 @@ public class LoginServiceImpl implements LoginService {
 
             }
             object.put("token",token);
+            object.put("roleId",commonUser.getRole_id());
 
         }else{
             object.put("code",1);

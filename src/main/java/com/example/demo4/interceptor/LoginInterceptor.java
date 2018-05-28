@@ -13,7 +13,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         StringBuffer url=httpServletRequest.getRequestURL();
-        if(url.toString().contains("/login/userLogin")){
+        if(url.toString().contains("/login/userLogin") || url.toString().contains("/tickets/add")){
             return true;
         }
 
