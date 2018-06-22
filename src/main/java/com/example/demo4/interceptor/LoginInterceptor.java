@@ -17,6 +17,16 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
 
+        if(url.toString().contains("/upload/test") || url.toString().contains("/hello/all")){
+            return true;
+        }
+        if(url.toString().contains("/sys/ueditor")){
+            return true;
+        }
+        if(url.toString().contains("/upload/")){
+            return true;
+        }
+
         HttpSession session = httpServletRequest.getSession();
         String token=httpServletRequest.getHeader("token");
         //请求未携带token

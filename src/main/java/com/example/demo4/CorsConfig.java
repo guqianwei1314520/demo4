@@ -4,6 +4,7 @@ import com.example.demo4.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
@@ -28,6 +29,12 @@ public class CorsConfig extends WebMvcConfigurationSupport {
         //这里可以添加多个拦截器
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**");
         super.addInterceptors(registry);
+    }
+
+    //设置静态资源的访问
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**").addResourceLocations("/");
     }
 
 }  
